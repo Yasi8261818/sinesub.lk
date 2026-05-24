@@ -5,8 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CineSub.LK — Movies & Sinhala Subtitles</title>
 <meta name="monetag" content="da6ce46691a641e522edf9da583d0d44">   
+<script src="https://quge5.com/88/tag.min.js" data-zone="242559" async data-cfasync="false"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 /* ═══════════════════════════════════════════
    CINESUB.LK — COMPLETE STYLESHEET
@@ -478,14 +480,12 @@ footer{
 </head>
 <body>
 
-<!-- LOADING SCREEN -->
 <div id="loadingScreen">
   <div class="loader-logo">CineSub<span>.LK</span></div>
   <div class="loader-bar"><div class="loader-fill"></div></div>
   <div class="loader-text">Loading Cinema Portal...</div>
 </div>
 
-<!-- NAVBAR -->
 <nav id="navbar">
   <div class="nav-logo" onclick="showPage('home')">CineSub<span>.LK</span></div>
   <div class="nav-cats">
@@ -509,7 +509,6 @@ footer{
   </div>
 </nav>
 
-<!-- ═══════════ HOME PAGE ═══════════ -->
 <div id="homePage" class="page active">
   <div class="notice-bar">
     <div class="notice-dot"></div>
@@ -590,7 +589,6 @@ footer{
   </div>
 </div>
 
-<!-- ═══════════ DETAIL PAGE ═══════════ -->
 <div id="detailPage" class="page">
   <div class="detail-hero">
     <div id="detailBackdrop"></div>
@@ -618,13 +616,11 @@ footer{
     </div>
   </div>
 
-  <!-- PLAYER SECTION -->
   <div class="player-section">
     <div class="section-label" id="playerTitleSection">
       <span>🎬 Stream Online</span>
     </div>
 
-    <!-- TV Season/Episode Controls (hidden for movies) -->
     <div class="ep-controls" id="epControls" style="display:none;">
       <span class="ep-label">Season:</span>
       <select class="ep-select" id="seasonSelect" onchange="updateEpisodeSelect()"></select>
@@ -632,7 +628,6 @@ footer{
       <select class="ep-select" id="episodeSelect" onchange="loadPlayer()"></select>
     </div>
 
-    <!-- Server Tabs -->
     <div class="server-tabs" id="serverTabs">
       <button class="srv-tab active" onclick="switchServer('vidsrc',this)">🟢 VidSrc</button>
       <button class="srv-tab" onclick="switchServer('anyembed',this)">🎯 AnyEmbed</button>
@@ -652,50 +647,18 @@ footer{
       <div id="actualPlayerWrap" style="width:100%;height:100%;display:none;"></div>
     </div>
 
-    <!-- Download Section -->
-    <div class="section-label" style="margin-top:30px;">⬇️ Downloads</div>
+    <div class="section-label" style="margin-top:30px;">⬇️ YTS Torrent Downloads</div>
     <div class="dl-list" id="detailDlList">
-      <div class="dl-row">
-        <div class="dl-row-left">
-          <span class="dl-q q-sub">SRT</span>
-          <div><div class="dl-info">Sinhala Subtitle Archive</div><div class="dl-size">Synced with all HD rips</div></div>
-        </div>
-        <button class="dl-btn dl-btn-sub" onclick="showToast('⬇️ Preparing subtitle download...')">Download Sub</button>
       </div>
-      <div class="dl-row">
-        <div class="dl-row-left">
-          <span class="dl-q q-4k">4K</span>
-          <div><div class="dl-info">Ultra HD Movie File</div><div class="dl-size">~8.0 GB — x265 HDR</div></div>
-        </div>
-        <button class="dl-btn dl-btn-file" onclick="showToast('⬇️ Fetching 4K download link...')">Download</button>
-      </div>
-      <div class="dl-row">
-        <div class="dl-row-left">
-          <span class="dl-q q-fhd">1080p</span>
-          <div><div class="dl-info">Full HD Movie File</div><div class="dl-size">~2.1 GB — x264 BluRay</div></div>
-        </div>
-        <button class="dl-btn dl-btn-file" onclick="showToast('⬇️ Fetching 1080p download link...')">Download</button>
-      </div>
-      <div class="dl-row">
-        <div class="dl-row-left">
-          <span class="dl-q q-hd">720p</span>
-          <div><div class="dl-info">HD Movie File</div><div class="dl-size">~900 MB — x264 WEB</div></div>
-        </div>
-        <button class="dl-btn dl-btn-file" onclick="showToast('⬇️ Fetching 720p download link...')">Download</button>
-      </div>
-    </div>
 
-    <!-- Cast -->
     <div class="section-label" style="margin-top:20px;">🎭 Cast</div>
     <div class="cast-scroll" id="detailCastScroll"></div>
 
-    <!-- Similar Movies -->
     <div class="section-label" style="margin-top:30px;" id="similarLabel" style="display:none;">🎬 More Like This</div>
     <div class="similar-grid" id="similarGrid"></div>
   </div>
 </div>
 
-<!-- ═══════════ SEARCH PAGE ═══════════ -->
 <div id="searchPage" class="page">
   <div class="search-header">
     <h2 id="searchPageTitle">Search Results</h2>
@@ -704,7 +667,6 @@ footer{
   <div id="searchPageGrid"></div>
 </div>
 
-<!-- TRAILER MODAL -->
 <div id="trailerModal" onclick="if(event.target===this)closeTrailer()">
   <div class="trailer-wrap">
     <button class="trailer-close" onclick="closeTrailer()">✕</button>
@@ -712,10 +674,8 @@ footer{
   </div>
 </div>
 
-<!-- TOAST -->
 <div id="toast"></div>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-grid">
     <div>
@@ -744,12 +704,10 @@ footer{
     <span class="footer-disclaimer">For educational & personal use only. We do not host any files.</span>
   </div>
 </footer>
-<script>(function(s){s.dataset.zone='11050394',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>   
-<script>(function(s){s.dataset.zone='11050348',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-<script src="https://quge5.com/88/tag.min.js" data-zone="242559" async data-cfasync="false"></script>
+
 <script>
 /* ═══════════════════════════════════════════
-   CINESUB.LK — MAIN SCRIPT (ALL ERRORS FIXED)
+   CINESUB.LK — MAIN SCRIPT
    ═══════════════════════════════════════════ */
 
 const API_KEY = 'b3e4dcdee44f099232eb375b6a4e6990';
@@ -775,7 +733,7 @@ let currentSeason = 1;
 let currentEpisode = 1;
 let totalSeasons = 1;
 let searchTimeout = null;
-let previousPage = 'home'; // for back button
+let previousPage = 'home';
 
 // ── API HELPER ──
 async function tmdb(path, extra='') {
@@ -805,22 +763,18 @@ function showPage(name) {
 async function init() {
   if (localStorage.getItem('theme') === 'light') document.body.classList.add('light-theme');
 
-  // Scroll listener for navbar
   window.addEventListener('scroll', () => {
     document.getElementById('navbar').classList.toggle('solid', window.scrollY > 80);
   });
 
-  // Close search on outside click
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.nav-search-wrap')) {
       document.getElementById('searchResults').classList.remove('show');
     }
   });
 
-  // Render local Sinhala movies immediately
   renderScrollRow('row-sinhala', sinhalaMovies, true);
 
-  // Load all rows in parallel
   const [trending, popular, action, scifi, horror, hindi] = await Promise.all([
     tmdb('/trending/movie/week'),
     tmdb('/movie/popular'),
@@ -831,7 +785,7 @@ async function init() {
   ]);
 
   if (trending.results?.length) {
-    renderHero(trending.results[0]);
+    renderHero(trending.results);
     renderScrollRow('row-trending', trending.results);
   }
   if (popular.results?.length) renderTop10('row-top10', popular.results.slice(0,10));
@@ -840,7 +794,6 @@ async function init() {
   if (horror.results?.length) renderScrollRow('row-horror', horror.results);
   if (hindi.results?.length) renderScrollRow('row-hindi', hindi.results);
 
-  // Hide loading screen
   setTimeout(() => {
     document.getElementById('loadingScreen').classList.add('fade');
     setTimeout(() => document.getElementById('loadingScreen').style.display='none', 500);
@@ -867,10 +820,10 @@ function cardHtml(m, isSi=false) {
   const p = poster(m.poster_path);
   const type = m.name ? 'tv' : 'movie';
   const id = m.id;
-  const title = (m.title || m.name || 'Unknown').replace(/'/g, "\'");
+  const title = (m.title || m.name || 'Unknown').replace(/'/g, "\\'");
   const rating = m.vote_average ? m.vote_average.toFixed(1) : '?';
   const imgHtml = p
-    ? `<img class="movie-poster" src="${p}" alt="${title}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'movie-poster-placeholder\'><span>${m.emoji||'🎬'}</span></div>'">`
+    ? `<img class="movie-poster" src="${p}" alt="${title}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'movie-poster-placeholder\\'><span>${m.emoji||'🎬'}</span></div>'">`
     : `<div class="movie-poster-placeholder"><span>${m.emoji||'🎬'}</span></div>`;
   return `<div class="movie-card" onclick="openDetail(${id},'${type}')">
     ${imgHtml}
@@ -880,7 +833,7 @@ function cardHtml(m, isSi=false) {
       <div class="card-title">${m.title || m.name || 'Unknown'}</div>
       <div class="card-actions">
         <button class="ca-btn ca-play" onclick="event.stopPropagation();openDetail(${id},'${type}')">▶ Play</button>
-        <button class="ca-btn ca-dl" onclick="event.stopPropagation();showToast('⬇️ Opening download page...')">⬇ DL</button>
+        <button class="ca-btn ca-dl" onclick="event.stopPropagation();openDetail(${id},'${type}')">⬇ DL</button>
       </div>
     </div>
   </div>`;
@@ -900,7 +853,7 @@ function renderTop10(rowId, list) {
     return `<div class="top10-card" onclick="openDetail(${m.id},'movie')">
       <div class="top10-num">${i+1}</div>
       <div class="top10-inner">
-        ${p ? `<img src="${p}" alt="${m.title||''}" style="width:100%;aspect-ratio:2/3;object-fit:cover;display:block;" loading="lazy">` : `<div style="width:100%;aspect-ratio:2/3;background:var(--surface3);display:flex;align-items:center;justify-content:center;font-size:2rem;">🎬</div>`}
+        ${p ? `<img src="${p}" alt="" style="width:100%;aspect-ratio:2/3;object-fit:cover;display:block;" loading="lazy">` : `<div style="width:100%;aspect-ratio:2/3;background:var(--surface3);display:flex;align-items:center;justify-content:center;font-size:2rem;">🎬</div>`}
       </div>
     </div>`;
   }).join('');
@@ -924,7 +877,6 @@ async function setCategory(cat, btn) {
     return;
   }
 
-  // Rebuild mainContent for category view
   showPage('home');
   const main = document.getElementById('mainContent');
 
@@ -968,9 +920,7 @@ async function setCategory(cat, btn) {
 async function openDetail(id, type='movie') {
   previousPage = document.querySelector('.page.active')?.id || 'homePage';
 
-  // Set up back button
   document.getElementById('backBtn').onclick = () => {
-    // Stop player
     document.getElementById('actualPlayerWrap').innerHTML = '';
     document.getElementById('actualPlayerWrap').style.display = 'none';
     document.getElementById('playerPreScreen').style.display = 'flex';
@@ -982,53 +932,51 @@ async function openDetail(id, type='movie') {
   showToast('⏳ Loading movie details...');
 
   currentMovieId = id;
-  currentImdbId = null;  // will be fetched for AnyEmbed
+  currentImdbId = null;
   currentMovieType = type;
   currentTrailerKey = null;
   currentSeason = 1;
   currentEpisode = 1;
 
-  // Reset player
   document.getElementById('actualPlayerWrap').innerHTML = '';
   document.getElementById('actualPlayerWrap').style.display = 'none';
   document.getElementById('playerPreScreen').style.display = 'flex';
+  document.getElementById('detailDlList').innerHTML = '<div style="color:var(--muted);font-size:0.85rem;padding:10px 0;">🔍 Fetching links from YTS...</div>';
 
-  // Hide/show TV controls
   document.getElementById('epControls').style.display = type === 'tv' ? 'flex' : 'none';
 
-  // Local Sinhala movie
   const local = sinhalaMovies.find(x => x.id === id);
   if (local) {
     renderDetail(local, null, null, type);
+    document.getElementById('detailDlList').innerHTML = '<div style="color:var(--muted);font-size:0.85rem;padding:10px 0;">ℹ️ Torrent links available for international movies only.</div>';
     return;
   }
 
-  // Fetch from TMDB
   const [details, credits, videos, extIds] = await Promise.all([
     tmdb(`/${type}/${id}`),
     tmdb(`/${type}/${id}/credits`),
     tmdb(`/${type}/${id}/videos`),
     tmdb(`/${type}/${id}/external_ids`)
   ]);
-  // Store IMDB ID for AnyEmbed (requires imdb id)
-  if (extIds?.imdb_id) currentImdbId = extIds.imdb_id;
+  
+  if (extIds?.imdb_id) {
+    currentImdbId = extIds.imdb_id;
+  }
 
-  // Get trailer key
   if (videos.results?.length) {
     const t = videos.results.find(v => v.type==='Trailer' && v.site==='YouTube')
            || videos.results.find(v => v.site==='YouTube');
     if (t) currentTrailerKey = t.key;
   }
 
-  // TV seasons
   if (type === 'tv' && details.number_of_seasons) {
     totalSeasons = details.number_of_seasons;
     buildSeasonSelect(totalSeasons);
   }
 
   renderDetail(details, credits, videos, type);
+  fetchYtsLinks(currentImdbId, type);
 
-  // Load similar
   const similar = await tmdb(`/${type}/${id}/similar`);
   if (similar.results?.length) {
     document.getElementById('similarLabel').style.display = 'block';
@@ -1056,9 +1004,8 @@ function renderDetail(m, credits, videos, type) {
     posterNA.textContent = m.emoji || '🎬';
   }
 
-  // Meta row
   const year = (m.release_date || m.first_air_date || '').slice(0,4);
-  const runtime = m.runtime ? `${m.runtime} min` : (m.episode_run_time?.[0] ? `${m.episode_run_time[0]} min/ep` : '');
+  const runtime = m.runtime ? `${m.runtime} min` : (m.episode_run_time?. ? `${m.episode_run_time} min/ep` : '');
   const langs = m.spoken_languages?.map(l=>l.english_name).slice(0,2).join(', ') || '';
   document.getElementById('detailMetaRow').innerHTML = `
     ${m.vote_average ? `<span class="meta-pill gold">⭐ ${m.vote_average.toFixed(1)}</span>` : ''}
@@ -1068,19 +1015,74 @@ function renderDetail(m, credits, videos, type) {
     <span class="meta-pill green">සිංහල SUB</span>
   `;
 
-  // Genres
-  const genres = m.genres?.length ? m.genres : (m.genres?.map ? m.genres : []);
-  document.getElementById('detailGenres').innerHTML = (genres || []).map(g=>`<span class="genre-tag">${g.name}</span>`).join('');
+  const genres = m.genres?.length ? m.genres : [];
+  document.getElementById('detailGenres').innerHTML = genres.map(g=>`<span class="genre-tag">${g.name}</span>`).join('');
 
-  // Cast
   const castEl = document.getElementById('detailCastScroll');
   if (credits?.cast?.length) {
     castEl.innerHTML = credits.cast.slice(0,10).map(c => {
-      const cp = c.profile_path ? `<img class="cast-avatar" src="${IMG}w92${c.profile_path}" alt="${c.name}" loading="lazy">` : `<div class="cast-no-avatar">👤</div>`;
+      const cp = c.profile_path ? `<img class="cast-avatar" src="${IMG}w92${c.profile_path}" alt="" loading="lazy">` : `<div class="cast-no-avatar">👤</div>`;
       return `<div class="cast-card">${cp}<div class="cast-name">${c.name}</div><div class="cast-char">${c.character||''}</div></div>`;
     }).join('');
   } else {
     castEl.innerHTML = '<div style="color:var(--muted);font-size:0.85rem;padding:10px 0;">Cast data unavailable.</div>';
+  }
+}
+
+// ── DYNAMIC YTS LINKS FETCH ──
+async function fetchYtsLinks(imdbId, type) {
+  const dlListContainer = document.getElementById('detailDlList');
+  
+  if (type === 'tv') {
+    dlListContainer.innerHTML = '<div style="color:var(--muted);font-size:0.85rem;padding:10px 0;">ℹ️ YTS only provides downloads for Movies. Use online players for TV Shows.</div>';
+    return;
+  }
+
+  if (!imdbId) {
+    dlListContainer.innerHTML = '<div style="color:var(--red);font-size:0.85rem;padding:10px 0;">❌ Error: IMDb reference missing. Cannot load torrents.</div>';
+    return;
+  }
+
+  try {
+    const ytsUrl = `https://yts.mx/api/v2/list_movies.json?query_term=${imdbId}`;
+    const res = await fetch(ytsUrl);
+    const data = await res.json();
+
+    if (data.status === 'ok' && data.data.movie_count > 0) {
+      const movieData = data.data.movies;
+      let htmlButtons = '';
+
+      movieData.torrents.forEach(torrent => {
+        let qClass = 'q-hd';
+        if (torrent.quality === '1080p') qClass = 'q-fhd';
+        if (torrent.quality === '2160p' || torrent.quality === '4K') qClass = 'q-4k';
+        if (torrent.type === 'bluray') qClass += ' q-sub';
+
+        const safeTitle = (movieData.title_long || "Movie Download").replace(/"/g, '&quot;');
+
+        htmlButtons += `
+          <div class="dl-row">
+            <div class="dl-row-left">
+              <span class="dl-q ${qClass}">${torrent.quality.toUpperCase()}</span>
+              <div>
+                <div class="dl-info">${safeTitle} (${torrent.type.toUpperCase()})</div>
+                <div class="dl-size">Size: ${torrent.size} | Peers: ${torrent.peers} | Seeds: ${torrent.seeds}</div>
+              </div>
+            </div>
+            <a href="${torrent.url}" class="dl-btn dl-btn-file" style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none;" onclick="showToast('⬇️ Torrent file download started!')">
+              <i class="fa fa-download" style="margin-right: 6px;"></i> Download
+            </a>
+          </div>
+        `;
+      });
+
+      dlListContainer.innerHTML = htmlButtons;
+    } else {
+      dlListContainer.innerHTML = '<div style="color:var(--muted);font-size:0.85rem;padding:10px 0;">❌ No active download links found on YTS for this movie.</div>';
+    }
+  } catch (err) {
+    console.error("YTS Fetch Error:", err);
+    dlListContainer.innerHTML = '<div style="color:var(--red);font-size:0.85rem;padding:10px 0;">❌ Error loading YTS download links. Please check connection.</div>';
   }
 }
 
@@ -1107,7 +1109,7 @@ async function updateEpisodeSelect() {
   currentEpisode = 1;
 }
 
-// ── PLAYER ──
+// ── PLAYER SERVERS ──
 const SERVERS = {
   vidsrc:      (id, type, s, e) => type==='tv' ? `https://vidsrc.to/embed/tv/${id}/${s}/${e}` : `https://vidsrc.to/embed/movie/${id}`,
   anyembed:    (id, type, s, e) => { const aid = currentImdbId || id; return type==='tv' ? `https://anyembed.xyz/tv/${aid}/${s}/${e}` : `https://anyembed.xyz/movie/${aid}`; },
@@ -1121,7 +1123,6 @@ function switchServer(name, btn) {
   currentServer = name;
   document.querySelectorAll('.srv-tab').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
-  // If player was active, reload with new server
   if (document.getElementById('actualPlayerWrap').style.display !== 'none') {
     loadPlayer();
   }
@@ -1191,7 +1192,7 @@ function handleSearch(q) {
       const title = m.title || m.name || 'Unknown';
       const year = (m.release_date || m.first_air_date || '').slice(0,4);
       return `<div class="sr-item" onclick="openDetail(${m.id},'${type}');document.getElementById('searchResults').classList.remove('show');document.getElementById('searchInput').value=''">
-        ${p ? `<img class="sr-poster" src="${p}" alt="${title}">` : `<div class="sr-poster" style="background:var(--surface3);display:flex;align-items:center;justify-content:center;">🎬</div>`}
+        ${p ? `<img class="sr-poster" src="${p}" alt="">` : `<div class="sr-poster" style="background:var(--surface3);display:flex;align-items:center;justify-content:center;">🎬</div>`}
         <div class="sr-info">
           <div class="sr-title">${title}</div>
           <div class="sr-year">${year} · ${type==='tv'?'TV Show':'Movie'} ${m.vote_average?'· ⭐'+m.vote_average.toFixed(1):''}</div>
@@ -1241,7 +1242,6 @@ function showToast(msg) {
   t._timer = setTimeout(() => t.classList.remove('show'), 2500);
 }
 
-// ── START ──
 window.addEventListener('DOMContentLoaded', init);
 </script>
 </body>

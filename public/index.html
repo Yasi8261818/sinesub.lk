@@ -4,12 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CineSub.LK — Movies & Sinhala Subtitles</title>
-<script type="text/javascript" data-cfasync="false">
-<script src="https://pl29539492.effectivecpmnetwork.com/72/0b/bb/720bbbbcf0343a576abba3f9ba1b1b10.js"></script>
-/*<![CDATA[/* */
-(function(){var b=window,s="dd1fa6b08deaef9eef024f479294a511",f=[["siteId",793-674*553+5673770],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0],["topmostLayer","auto"]],h=["d3d3LmFudGlhZGJsb2Nrc3lzdGVtcy5jb20vcGpzcGRmLm1pbi5jc3M=","ZDNjb2Q4MHRobjdxbmQuY2xvdWRmcm9udC5uZXQvTUl1cS9qY3J5cHRvLWpzLm1pbi5qcw==","d3d3Lm1pZmV2dHVmbGZyaC5jb20vampzcGRmLm1pbi5jc3M=","d3d3Lml6cGF4cHBkd3RicHdvLmNvbS95b1NXTW0vYWNyeXB0by1qcy5taW4uanM="],v=-1,r,w,c=function(){clearTimeout(w);v++;if(h[v]&&!(1805370438000<(new Date).getTime()&&1<v)){r=b.document.createElement("script");r.type="text/javascript";r.async=!0;var z=b.document.getElementsByTagName("script")[0];r.src="https://"+atob(h[v]);r.crossOrigin="anonymous";r.onerror=c;r.onload=function(){clearTimeout(w);b[s.slice(0,16)+s.slice(0,16)]||c()};w=setTimeout(c,5E3);z.parentNode.insertBefore(r,z)}};if(!b[s]){try{Object.freeze(b[s]=f)}catch(e){}c()}})();
-/*]]>/* */
-</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -21,7 +15,7 @@
   --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.12);
   --red:#e8192c;--red2:#c01020;--red3:rgba(232,25,44,0.15);
   --gold:#f5c518;--green:#21d07a;--blue:#01b4e4;
-  --text:#eeeeee;--muted:#888;--muted2:#555;
+  --text:#ffffff;--muted:#aaaaaa;--muted2:#666666;
   --r:6px;--r2:10px;--r3:14px;
   --font:'Barlow',sans-serif;
   --font2:'Barlow Condensed',sans-serif;
@@ -29,26 +23,57 @@
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--text);font-family:var(--font);overflow-x:hidden;min-height:100vh;}
+body{background:var(--bg);color:var(--text) !important;font-family:var(--font);overflow-x:hidden;min-height:100vh;}
 a{text-decoration:none;color:inherit;}
 button{font-family:var(--font);}
 ::-webkit-scrollbar{width:6px;height:4px;}
 ::-webkit-scrollbar-track{background:var(--bg);}
 ::-webkit-scrollbar-thumb{background:var(--red);border-radius:3px;}
 
-/* ── LOADING SCREEN ── */
-#loadingScreen{
-  position:fixed;inset:0;background:var(--bg);z-index:9999;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
-  transition:opacity 0.5s ease;
+/* ── CINEMATIC LOADING SCREEN (UPGRADED) ── */
+#loadingScreen {
+  position:fixed;inset:0;background:radial-gradient(circle at center, #161616 0%, var(--bg) 100%);z-index:9999;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
-#loadingScreen.fade{opacity:0;pointer-events:none;}
-.loader-logo{font-family:var(--font3);font-size:3.5rem;color:var(--red);letter-spacing:4px;}
-.loader-logo span{color:#fff;}
-.loader-bar{width:220px;height:2px;background:var(--surface3);border-radius:2px;overflow:hidden;}
-.loader-fill{height:100%;background:linear-gradient(90deg,var(--red2),var(--red));animation:loadfill 1.4s ease forwards;}
-@keyframes loadfill{from{width:0}to{width:100%}}
-.loader-text{color:var(--muted);font-size:0.78rem;letter-spacing:3px;text-transform:uppercase;}
+#loadingScreen.fade {opacity:0;transform:scale(1.05);pointer-events:none;}
+.loader-content {
+  text-align:center;display:flex;flex-direction:column;align-items:center;gap:24px;
+}
+.loader-logo {
+  font-family:var(--font3);font-size:4.2rem;color:var(--red);letter-spacing:6px;
+  animation:pulseLogo 2s infinite ease-in-out;
+  text-shadow: 0 0 30px rgba(232, 25, 44, 0.3);
+}
+.loader-logo span {color:#fff;text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);}
+.loader-spinner-box {
+  position: relative;width: 60px;height: 60px;margin-bottom: 10px;
+}
+.loader-circle {
+  position: absolute;inset: 0;border: 3px solid transparent;border-top-color: var(--red);
+  border-radius: 50%;animation: spinCircle 1s linear infinite;
+}
+.loader-circle-inner {
+  position: absolute;inset: 6px;border: 3px solid transparent;border-bottom-color: #fff;
+  border-radius: 50%;animation: spinCircleInner 1.5s linear infinite;
+}
+.loader-bar {
+  width:240px;height:3px;background:rgba(255,255,255,0.05);border-radius:4px;overflow:hidden;position:relative;
+}
+.loader-fill {
+  height:100%;background:linear-gradient(90deg, transparent, var(--red), #fff, var(--red), transparent);
+  background-size: 200% 100%;
+  animation: loadfill 1.6s infinite linear;width: 100%;
+}
+.loader-text {
+  color:var(--muted);font-size:0.8rem;letter-spacing:4px;text-transform:uppercase;
+  font-weight: 500;animation: pulseText 1.5s infinite ease-in-out;
+}
+@keyframes spinCircle { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+@keyframes spinCircleInner { 0% { transform: rotate(0deg); } 100% { transform: rotate(-360deg); } }
+@keyframes loadfill { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+@keyframes pulseLogo { 0%, 100% { transform: scale(0.98); opacity: 0.9; } 50% { transform: scale(1.02); opacity: 1; text-shadow: 0 0 40px rgba(232, 25, 44, 0.5); } }
+@keyframes pulseText { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; color: rgba(255,255,255,0.7); } }
 
 /* ── NAVBAR ── */
 #navbar{
@@ -68,18 +93,18 @@ button{font-family:var(--font);}
   font-size:0.82rem;font-weight:600;white-space:nowrap;
   border:none;background:transparent;cursor:pointer;transition:all 0.18s;letter-spacing:0.3px;
 }
-.nav-cat:hover{color:var(--text);background:var(--surface2);}
+.nav-cat:hover{color:var(--text) !important;background:var(--surface2);}
 .nav-cat.active{color:var(--red);background:var(--surface2);}
 .nav-right{display:flex;align-items:center;gap:10px;margin-left:auto;flex-shrink:0;}
 .icon-btn{
   width:36px;height:36px;display:flex;align-items:center;justify-content:center;
   background:var(--surface2);border:1px solid var(--border2);border-radius:var(--r);
-  cursor:pointer;color:var(--text);font-size:0.95rem;transition:background 0.2s;
+  cursor:pointer;color:var(--text) !important;font-size:0.95rem;transition:background 0.2s;
 }
 .icon-btn:hover{background:var(--surface3);}
 .nav-search-wrap{position:relative;}
 #searchInput{
-  background:var(--surface2);border:1px solid var(--border2);color:var(--text);
+  background:var(--surface2);border:1px solid var(--border2);color:var(--text) !important;
   padding:8px 38px 8px 14px;border-radius:var(--r);font-size:0.85rem;
   width:200px;transition:all 0.25s;outline:none;
 }
@@ -104,47 +129,63 @@ button{font-family:var(--font);}
 .page.active{display:block;}
 
 /* ── HOME PAGE ── */
-/* HERO */
+/* HERO (SLIDESHOW SLICK DESIGN) */
 #heroSection{
-  height:85vh;min-height:500px;position:relative;
+  height:85vh;min-height:550px;position:relative;
   display:flex;align-items:flex-end;padding:0 4% 60px;overflow:hidden;
 }
 #heroBackdrop{
   position:absolute;inset:0;background-size:cover;
-  background-position:center top;transition:background-image 0.8s ease;
+  background-position:center top;transition:background-image 0.8s ease-in-out, transform 0.8s ease-in-out;
+}
+#heroBackdrop.fade-effect {
+  transform: scale(1.02);
 }
 .hero-overlay{
   position:absolute;inset:0;
   background:
-    linear-gradient(90deg,rgba(10,10,10,0.95) 0%,rgba(10,10,10,0.5) 45%,transparent 100%),
-    linear-gradient(0deg,rgba(10,10,10,1) 0%,rgba(10,10,10,0.3) 40%,transparent 80%);
+    linear-gradient(90deg,rgba(10,10,10,0.98) 0%,rgba(10,10,10,0.6) 45%,transparent 100%),
+    linear-gradient(0deg,rgba(10,10,10,1) 0%,rgba(10,10,10,0.2) 40%,transparent 80%);
 }
-.hero-content{position:relative;z-index:2;max-width:580px;}
+.hero-content{position:relative;z-index:2;max-width:620px;transition:opacity 0.4s ease, transform 0.4s ease;}
+.hero-content.changing {opacity:0;transform:translateY(10px);}
 .hero-badges{display:flex;gap:7px;margin-bottom:14px;flex-wrap:wrap;}
 .badge{padding:4px 10px;border-radius:4px;font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;}
 .badge-rank{background:var(--red);color:#fff;}
 .badge-sub{background:rgba(33,208,122,0.15);color:var(--green);border:1px solid rgba(33,208,122,0.3);}
 .badge-hd{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.8);border:1px solid var(--border2);}
-.hero-title{font-family:var(--font3);font-size:clamp(2.4rem,5.5vw,4.2rem);line-height:1;margin-bottom:10px;letter-spacing:1px;}
+.hero-title{font-family:var(--font3);font-size:clamp(2.4rem,5.5vw,4.2rem);line-height:1;margin-bottom:10px;letter-spacing:1px;text-transform:uppercase;}
 .hero-meta{display:flex;gap:14px;margin-bottom:14px;font-size:0.85rem;align-items:center;flex-wrap:wrap;}
 .hero-rating{color:var(--gold);font-weight:700;}
 .hero-year{color:var(--muted);}
 .hero-genre{background:var(--surface2);padding:3px 9px;border-radius:4px;font-size:0.75rem;color:rgba(255,255,255,0.7);}
-.hero-desc{color:rgba(255,255,255,0.68);font-size:0.93rem;line-height:1.65;margin-bottom:22px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
-.hero-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.hero-desc{color:rgba(255,255,255,0.68);font-size:0.95rem;line-height:1.65;margin-bottom:24px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
 .btn-play{
-  background:#fff;color:#000;padding:11px 26px;border-radius:var(--r);
+  background:#fff;color:#000;padding:12px 28px;border-radius:var(--r);
   font-weight:700;font-size:0.92rem;border:none;cursor:pointer;
-  display:flex;align-items:center;gap:7px;transition:opacity 0.2s;
+  display:flex;align-items:center;gap:7px;transition:all 0.2s;
 }
-.btn-play:hover{opacity:0.88;}
+.btn-play:hover{opacity:0.88;transform:translateY(-1px);}
 .btn-info{
-  background:rgba(100,100,100,0.4);color:#fff;padding:11px 22px;
+  background:rgba(255,255,255,0.1);color:#fff;padding:12px 24px;
   border-radius:var(--r);font-weight:700;font-size:0.92rem;
-  border:1px solid var(--border2);cursor:pointer;transition:background 0.2s;
+  border:1px solid var(--border2);cursor:pointer;transition:all 0.2s;
   backdrop-filter:blur(4px);
 }
-.btn-info:hover{background:rgba(100,100,100,0.6);}
+.btn-info:hover{background:rgba(255,255,255,0.2);transform:translateY(-1px);}
+
+/* HERO CAROUSEL INDICATORS */
+.hero-indicators {
+  position: absolute;right: 4%;bottom: 60px;display: flex;gap: 8px;z-index: 10;
+}
+.indicator-dot {
+  width: 24px;height: 3px;background: rgba(255,255,255,0.2);border-radius: 2px;
+  cursor: pointer;transition: all 0.3s ease;
+}
+.indicator-dot.active {
+  background: var(--red);width: 40px;
+}
 
 /* CONTENT ROWS */
 #mainContent{padding-bottom:50px;}
@@ -234,7 +275,7 @@ button{font-family:var(--font);}
 .detail-hero-inner{position:relative;z-index:3;width:100%;max-width:1100px;margin:0 auto;}
 .back-btn{
   display:inline-flex;align-items:center;gap:7px;
-  background:var(--surface2);color:var(--text);border:1px solid var(--border2);
+  background:var(--surface2);color:var(--text) !important;border:1px solid var(--border2);
   padding:9px 18px;border-radius:var(--r);font-weight:600;font-size:0.85rem;
   cursor:pointer;margin-bottom:28px;transition:all 0.2s;
 }
@@ -306,7 +347,7 @@ button{font-family:var(--font);}
   background:var(--surface2);border:1px solid var(--border2);color:var(--muted);
   cursor:pointer;transition:all 0.18s;
 }
-.srv-tab:hover{color:var(--text);border-color:rgba(255,255,255,0.2);}
+.srv-tab:hover{color:var(--text) !important;border-color:rgba(255,255,255,0.2);}
 .srv-tab.active{background:var(--red);border-color:var(--red);color:#fff;}
 .srv-tab.error{border-color:rgba(232,25,44,0.5);color:rgba(232,25,44,0.6);}
 
@@ -315,7 +356,7 @@ button{font-family:var(--font);}
 .ep-label{font-size:0.85rem;color:var(--muted);font-weight:600;}
 .ep-select{
   background:var(--surface2);border:1px solid var(--border2);
-  color:var(--text);padding:7px 12px;border-radius:var(--r);
+  color:var(--text) !important;padding:7px 12px;border-radius:var(--r);
   font-size:0.85rem;outline:none;cursor:pointer;
 }
 .ep-select:focus{border-color:var(--red);}
@@ -379,874 +420,4 @@ button{font-family:var(--font);}
   gap:16px;
 }
 .search-empty{text-align:center;padding:60px 20px;color:var(--muted);}
-.search-empty .empty-icon{font-size:3rem;margin-bottom:12px;}
-.search-empty p{font-size:1rem;}
-
-/* ── TRAILER MODAL ── */
-#trailerModal{
-  position:fixed;inset:0;z-index:800;
-  background:rgba(0,0,0,0.94);
-  display:flex;align-items:center;justify-content:center;
-  opacity:0;pointer-events:none;transition:opacity 0.3s;
-}
-#trailerModal.open{opacity:1;pointer-events:all;}
-.trailer-wrap{width:90%;max-width:820px;position:relative;}
-.trailer-close{
-  position:absolute;top:-40px;right:0;
-  background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;
-  width:36px;height:36px;display:flex;align-items:center;justify-content:center;
-  border-radius:50%;background:var(--surface2);transition:background 0.2s;
-}
-.trailer-close:hover{background:var(--red);}
-.trailer-frame{width:100%;aspect-ratio:16/9;background:#000;border-radius:var(--r2);overflow:hidden;}
-.trailer-frame iframe{width:100%;height:100%;border:none;}
-
-/* ── TOAST ── */
-#toast{
-  position:fixed;bottom:24px;left:50%;
-  transform:translateX(-50%) translateY(80px);
-  background:var(--surface2);border:1px solid var(--border2);
-  color:var(--text);padding:11px 22px;border-radius:30px;
-  font-size:0.85rem;font-weight:600;z-index:9000;
-  transition:all 0.3s ease;opacity:0;white-space:nowrap;
-  box-shadow:0 6px 20px rgba(0,0,0,0.5);
-}
-#toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
-
-/* ── FOOTER ── */
-footer{
-  background:var(--surface);border-top:1px solid var(--border);
-  padding:36px 4% 24px;
-}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px;margin-bottom:20px;}
-.footer-logo{font-family:var(--font3);font-size:1.7rem;color:var(--red);margin-bottom:7px;letter-spacing:2px;}
-.footer-logo span{color:#fff;}
-.footer-desc{color:var(--muted);font-size:0.82rem;line-height:1.6;}
-.footer-col h4{font-family:var(--font2);font-size:0.88rem;font-weight:700;margin-bottom:12px;letter-spacing:0.5px;}
-.footer-link{display:block;color:var(--muted);font-size:0.82rem;margin-bottom:6px;cursor:pointer;transition:color 0.2s;}
-.footer-link:hover{color:var(--text);}
-.footer-bottom{
-  border-top:1px solid var(--border);padding-top:16px;
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:10px;
-}
-.footer-copy{color:var(--muted2);font-size:0.78rem;}
-.footer-disclaimer{color:var(--muted2);font-size:0.75rem;}
-
-/* ── LIGHT THEME ── */
-.light-theme{
-  --bg:#f0f0f0;--surface:#ffffff;--surface2:#e5e5e7;--surface3:#d5d5d9;
-  --text:#1c1c1e;--muted:#636366;--muted2:#aeaeb2;
-  --border:rgba(0,0,0,0.06);--border2:rgba(0,0,0,0.14);
-}
-.light-theme #navbar{background:rgba(240,240,240,0.97);}
-.light-theme .card-hover-panel{background:linear-gradient(0deg,rgba(255,255,255,0.97),rgba(255,255,255,0.88) 70%,transparent);}
-.light-theme .card-title{color:#000;}
-.light-theme .ca-play{background:#000;color:#fff;}
-.light-theme footer{background:var(--surface);}
-
-/* ── NOTICE BAR ── */
-.notice-bar{
-  margin-top:64px;padding:10px 4%;
-  background:linear-gradient(90deg,rgba(232,25,44,0.12),transparent);
-  border-bottom:1px solid rgba(232,25,44,0.2);
-  display:flex;align-items:center;gap:10px;font-size:0.83rem;
-}
-.notice-dot{
-  width:8px;height:8px;border-radius:50%;
-  background:var(--red);animation:blink 1.2s infinite;flex-shrink:0;
-}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
-
-/* ── RESPONSIVE ── */
-@media(max-width:768px){
-  .nav-cats{display:none;}
-  #searchInput{width:160px;}
-  #searchInput:focus{width:200px;}
-  .detail-flex{flex-direction:column;gap:20px;}
-  .detail-poster-col{flex:none;width:180px;margin:0 auto;}
-  .detail-info-col{text-align:center;}
-  .detail-actions{justify-content:center;}
-  .detail-meta-row{justify-content:center;}
-  .detail-genres{justify-content:center;}
-  .footer-grid{grid-template-columns:1fr;gap:20px;}
-  .footer-bottom{flex-direction:column;align-items:flex-start;gap:6px;}
-  .dl-row{flex-direction:column;align-items:flex-start;gap:10px;}
-  .hero-actions{gap:8px;}
-}
-@media(max-width:480px){
-  .grid-layout,.similar-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));}
-  .nav-logo{font-size:1.6rem;}
-  .detail-title{font-size:1.9rem;}
-}
-</style>
-</head>
-<body>
-
-<!-- LOADING SCREEN -->
-<div id="loadingScreen">
-  <div class="loader-logo">CineSub<span>.LK</span></div>
-  <div class="loader-bar"><div class="loader-fill"></div></div>
-  <div class="loader-text">Loading Cinema Portal...</div>
-</div>
-
-<!-- NAVBAR -->
-<nav id="navbar">
-  <div class="nav-logo" onclick="showPage('home')">CineSub<span>.LK</span></div>
-  <div class="nav-cats">
-    <button class="nav-cat active" onclick="setCategory('trending',this)">🏠 Home</button>
-    <button class="nav-cat" onclick="setCategory('sinhala',this)">🇱🇰 සිංහල</button>
-    <button class="nav-cat" onclick="setCategory('28',this)">💥 Action</button>
-    <button class="nav-cat" onclick="setCategory('878',this)">🚀 Sci-Fi</button>
-    <button class="nav-cat" onclick="setCategory('27',this)">👻 Horror</button>
-    <button class="nav-cat" onclick="setCategory('35',this)">😂 Comedy</button>
-    <button class="nav-cat" onclick="setCategory('18',this)">🎭 Drama</button>
-    <button class="nav-cat" onclick="setCategory('hindi',this)">🎬 Hindi</button>
-    <button class="nav-cat" onclick="setCategory('tv',this)">📺 TV Shows</button>
-  </div>
-  <div class="nav-right">
-    <div class="nav-search-wrap">
-      <input type="text" id="searchInput" placeholder="Search movies..." oninput="handleSearch(this.value)" onkeydown="if(event.key==='Enter')doFullSearch(this.value)">
-      <span class="search-icon">🔍</span>
-      <div id="searchResults"></div>
-    </div>
-    <div class="icon-btn" onclick="toggleTheme()" title="Toggle Theme">🌓</div>
-  </div>
-</nav>
-
-<!-- ═══════════ HOME PAGE ═══════════ -->
-<div id="homePage" class="page active">
-  <div class="notice-bar">
-    <div class="notice-dot"></div>
-    <span><strong>CineSub.LK</strong> — Free Sinhala subtitles & online streaming for all movies</span>
-  </div>
-
-  <section id="heroSection">
-    <div id="heroBackdrop" class="hero-bg"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <div class="hero-badges">
-        <span class="badge badge-rank">🔥 Trending #1</span>
-        <span class="badge badge-sub">සිංහල SUB</span>
-        <span class="badge badge-hd">HD</span>
-      </div>
-      <h1 class="hero-title" id="heroTitle">Loading...</h1>
-      <div class="hero-meta">
-        <span class="hero-rating" id="heroRating">⭐ 8.0</span>
-        <span class="hero-year" id="heroYear">2026</span>
-        <span class="hero-genre" id="heroGenre">Movie</span>
-      </div>
-      <p class="hero-desc" id="heroDesc">Loading featured movie...</p>
-      <div class="hero-actions">
-        <button class="btn-play" id="heroPlayBtn">▶ Watch Now</button>
-        <button class="btn-info" id="heroInfoBtn">ℹ More Info</button>
-      </div>
-    </div>
-  </section>
-
-  <div id="mainContent">
-    <section class="section" id="sec-sinhala">
-      <div class="section-head">
-        <div class="section-title"><div class="section-title-bar"></div>🇱🇰 සිංහල Films</div>
-      </div>
-      <div class="scroll-row" id="row-sinhala"></div>
-    </section>
-    <section class="section" id="sec-trending">
-      <div class="section-head">
-        <div class="section-title"><div class="section-title-bar"></div>🔥 Trending This Week</div>
-        <span class="see-all" onclick="setCategory('trending',null)">See all →</span>
-      </div>
-      <div class="scroll-row" id="row-trending"></div>
-    </section>
-    <section class="section" id="sec-top10">
-      <div class="section-head">
-        <div class="section-title"><div class="section-title-bar"></div>🏆 Top 10 Most Popular</div>
-      </div>
-      <div class="scroll-row" id="row-top10"></div>
-    </section>
-    <section class="section" id="sec-action">
-      <div class="section-head">
-        <div class="section-title"><div class="section-title-bar"></div>💥 Action & Adventure</div>
-        <span class="see-all" onclick="setCategory('28',null)">See all →</span>
-      </div>
-      <div class="scroll-row" id="row-action"></div>
-    </section>
-    <section class="section" id="sec-scifi">
-      <div class="section-head">
-        <div class="section-title"><div class="section-title-bar"></div>🚀 Sci-Fi Hits</div>
-        <span class="see-all" onclick="setCategory('878',null)">See all →</span>
-      </div>
-      <div class="scroll-row" id="row-scifi"></div>
-    </section>
-    <section class="section" id="sec-horror">
-      <div class="section-head">
-        <div class="section-title"><div class="section-title-bar"></div>👻 Horror & Thriller</div>
-        <span class="see-all" onclick="setCategory('27',null)">See all →</span>
-      </div>
-      <div class="scroll-row" id="row-horror"></div>
-    </section>
-    <section class="section" id="sec-hindi">
-      <div class="section-head">
-        <div class="section-title"><div class="section-title-bar"></div>🎬 Hindi Blockbusters</div>
-        <span class="see-all" onclick="setCategory('hindi',null)">See all →</span>
-      </div>
-      <div class="scroll-row" id="row-hindi"></div>
-    </section>
-  </div>
-</div>
-
-<!-- ═══════════ DETAIL PAGE ═══════════ -->
-<div id="detailPage" class="page">
-  <div class="detail-hero">
-    <div id="detailBackdrop"></div>
-    <div class="detail-hero-overlay"></div>
-    <div class="detail-hero-inner">
-      <button class="back-btn" id="backBtn">← Back</button>
-      <div class="detail-flex">
-        <div class="detail-poster-col">
-          <img id="detailPoster" src="" alt="Poster" style="display:none">
-          <div class="no-poster" id="detailPosterNA" style="display:flex">🎬</div>
-        </div>
-        <div class="detail-info-col">
-          <h1 class="detail-title" id="detailTitle">Loading...</h1>
-          <div class="detail-meta-row" id="detailMetaRow">
-            <span class="meta-pill gold">⭐ —</span>
-          </div>
-          <div class="detail-genres" id="detailGenres"></div>
-          <p class="detail-desc" id="detailDesc">Loading description...</p>
-          <div class="detail-actions">
-            <button class="btn-watch" onclick="scrollToPlayer()">▶ Watch Online</button>
-            <button class="btn-trailer" onclick="playTrailer()">🎬 Trailer</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- PLAYER SECTION -->
-  <div class="player-section">
-    <div class="section-label" id="playerTitleSection">
-      <span>🎬 Stream Online</span>
-    </div>
-
-    <!-- TV Season/Episode Controls (hidden for movies) -->
-    <div class="ep-controls" id="epControls" style="display:none;">
-      <span class="ep-label">Season:</span>
-      <select class="ep-select" id="seasonSelect" onchange="updateEpisodeSelect()"></select>
-      <span class="ep-label">Episode:</span>
-      <select class="ep-select" id="episodeSelect" onchange="loadPlayer()"></select>
-    </div>
-
-    <!-- Server Tabs -->
-    <div class="server-tabs" id="serverTabs">
-      <button class="srv-tab active" onclick="switchServer('vidsrc',this)">🟢 VidSrc</button>
-      <button class="srv-tab" onclick="switchServer('anyembed',this)">🎯 AnyEmbed</button>
-      <button class="srv-tab" onclick="switchServer('embed',this)">⚡ EmbedSu</button>
-      <button class="srv-tab" onclick="switchServer('superembed',this)">🔥 SuperEmbed</button>
-      <button class="srv-tab" onclick="switchServer('moviesapi',this)">💎 MoviesAPI</button>
-      <button class="srv-tab" onclick="switchServer('smashystream',this)">🚀 Smashy</button>
-    </div>
-
-    <div class="player-box">
-      <div id="playerPreScreen">
-        <div style="font-size:3rem;">▶️</div>
-        <h3>Ready to Stream</h3>
-        <p>Click "Watch Online" on the movie detail or press activate to start the player.</p>
-        <button class="activate-btn" onclick="loadPlayer()">▶ Activate Player</button>
-      </div>
-      <div id="actualPlayerWrap" style="width:100%;height:100%;display:none;"></div>
-    </div>
-
-    <!-- Download Section -->
-    <div class="section-label" style="margin-top:30px;">⬇️ Downloads</div>
-    <div class="dl-list" id="detailDlList">
-      <div class="dl-row">
-        <div class="dl-row-left">
-          <span class="dl-q q-sub">SRT</span>
-          <div><div class="dl-info">Sinhala Subtitle Archive</div><div class="dl-size">Synced with all HD rips</div></div>
-        </div>
-        <button class="dl-btn dl-btn-sub" onclick="showToast('⬇️ Preparing subtitle download...')">Download Sub</button>
-      </div>
-      <div class="dl-row">
-        <div class="dl-row-left">
-          <span class="dl-q q-4k">4K</span>
-          <div><div class="dl-info">Ultra HD Movie File</div><div class="dl-size">~8.0 GB — x265 HDR</div></div>
-        </div>
-        <button class="dl-btn dl-btn-file" onclick="showToast('⬇️ Fetching 4K download link...')">Download</button>
-      </div>
-      <div class="dl-row">
-        <div class="dl-row-left">
-          <span class="dl-q q-fhd">1080p</span>
-          <div><div class="dl-info">Full HD Movie File</div><div class="dl-size">~2.1 GB — x264 BluRay</div></div>
-        </div>
-        <button class="dl-btn dl-btn-file" onclick="showToast('⬇️ Fetching 1080p download link...')">Download</button>
-      </div>
-      <div class="dl-row">
-        <div class="dl-row-left">
-          <span class="dl-q q-hd">720p</span>
-          <div><div class="dl-info">HD Movie File</div><div class="dl-size">~900 MB — x264 WEB</div></div>
-        </div>
-        <button class="dl-btn dl-btn-file" onclick="showToast('⬇️ Fetching 720p download link...')">Download</button>
-      </div>
-    </div>
-
-    <!-- Cast -->
-    <div class="section-label" style="margin-top:20px;">🎭 Cast</div>
-    <div class="cast-scroll" id="detailCastScroll"></div>
-
-    <!-- Similar Movies -->
-    <div class="section-label" style="margin-top:30px;" id="similarLabel" style="display:none;">🎬 More Like This</div>
-    <div class="similar-grid" id="similarGrid"></div>
-  </div>
-</div>
-
-<!-- ═══════════ SEARCH PAGE ═══════════ -->
-<div id="searchPage" class="page">
-  <div class="search-header">
-    <h2 id="searchPageTitle">Search Results</h2>
-    <p id="searchPageSub">Showing results for your query</p>
-  </div>
-  <div id="searchPageGrid"></div>
-</div>
-
-<!-- TRAILER MODAL -->
-<div id="trailerModal" onclick="if(event.target===this)closeTrailer()">
-  <div class="trailer-wrap">
-    <button class="trailer-close" onclick="closeTrailer()">✕</button>
-    <div class="trailer-frame" id="trailerFrame"></div>
-  </div>
-</div>
-
-<!-- TOAST -->
-<div id="toast"></div>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-grid">
-    <div>
-      <div class="footer-logo">CineSub<span>.LK</span></div>
-      <p class="footer-desc">Free Sinhala subtitles and online streaming portal for movie fans in Sri Lanka. Watch the latest Hollywood, Bollywood and local films with Sinhala subtitles.</p>
-    </div>
-    <div>
-      <h4>NAVIGATION</h4>
-      <span class="footer-link" onclick="setCategory('trending',null)">🏠 Home</span>
-      <span class="footer-link" onclick="setCategory('sinhala',null)">🇱🇰 සිංහල Films</span>
-      <span class="footer-link" onclick="setCategory('28',null)">💥 Action</span>
-      <span class="footer-link" onclick="setCategory('878',null)">🚀 Sci-Fi</span>
-      <span class="footer-link" onclick="setCategory('tv',null)">📺 TV Shows</span>
-    </div>
-    <div>
-      <h4>GENRES</h4>
-      <span class="footer-link" onclick="setCategory('27',null)">👻 Horror</span>
-      <span class="footer-link" onclick="setCategory('35',null)">😂 Comedy</span>
-      <span class="footer-link" onclick="setCategory('18',null)">🎭 Drama</span>
-      <span class="footer-link" onclick="setCategory('hindi',null)">🎬 Hindi</span>
-      <span class="footer-link" onclick="setCategory('10751',null)">👨‍👩‍👧 Family</span>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span class="footer-copy">© 2026 CineSub.LK — Built for Film Lovers in Sri Lanka 🇱🇰</span>
-    <span class="footer-disclaimer">For educational & personal use only. We do not host any files.</span>
-  </div>
-</footer>
-<script>(function(s){s.dataset.zone='11050394',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-<script>(function(s){s.dataset.zone='11050348',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-<script>
-/* ═══════════════════════════════════════════
-   CINESUB.LK — MAIN SCRIPT (ALL ERRORS FIXED)
-   ═══════════════════════════════════════════ */
-
-const API_KEY = 'b3e4dcdee44f099232eb375b6a4e6990';
-const BASE = 'https://api.themoviedb.org/3';
-const IMG = 'https://image.tmdb.org/t/p/';
-
-// ── LOCAL SINHALA MOVIES ──
-const sinhalaMovies = [
-  {id:99999001,title:'Bambaru Awith',overview:'ශ්‍රී ලාංකික සිනමාවේ කීර්තිමත් ෆිල්ම් — ආදරය, ජීවිතය, සහ ඉටු නොවූ සිහිනය.',poster_path:null,backdrop_path:null,vote_average:8.4,release_date:'2015-01-01',original_language:'si',emoji:'🦋',genres:['Drama','Romance']},
-  {id:99999002,title:'Sanda Yunivi',overview:'සිංහල සිනමාවේ ප්‍රේමණීය ෆිල්ම් — ජීවිතයේ දුක සහ සතුට දෙකම රස විඳිමින්.',poster_path:null,backdrop_path:null,vote_average:8.9,release_date:'2021-01-01',original_language:'si',emoji:'🌙',genres:['Romance']},
-  {id:99999003,title:'Aiyai Mayam',overview:'සිංහල comedy genre එකේ හොඳම ෆිල්ම් — සිනා ගෙනෙන කතාව.',poster_path:null,backdrop_path:null,vote_average:8.1,release_date:'2022-01-01',original_language:'si',emoji:'🎪',genres:['Comedy']},
-  {id:99999004,title:'Hansa Vilak',overview:'ශ්‍රී ලාංකේය ගම්බද ජීවිතය රූගත කළ හොඳම ෆිල්ම් — නිශ්ශබ්ද හැඟීම් ගැඹුරෙන් දිනන කතාව.',poster_path:null,backdrop_path:null,vote_average:8.6,release_date:'2019-01-01',original_language:'si',emoji:'🕊️',genres:['Drama']},
-  {id:99999005,title:'Sulanga Enu Pinisa',overview:'චිත්‍රාගාර award winner — ගැඹුරු කතාවක් සරල රූප රාමු හරහා කියවෙන ෆිල්ම් එකක්.',poster_path:null,backdrop_path:null,vote_average:8.3,release_date:'2005-01-01',original_language:'si',emoji:'🌊',genres:['Drama']}
-];
-
-// ── GLOBAL STATE ──
-let currentMovieId = null;
-let currentImdbId = null;
-let currentMovieType = 'movie';
-let currentTrailerKey = null;
-let currentServer = 'vidsrc';
-let currentSeason = 1;
-let currentEpisode = 1;
-let totalSeasons = 1;
-let searchTimeout = null;
-let previousPage = 'home'; // for back button
-
-// ── API HELPER ──
-async function tmdb(path, extra='') {
-  try {
-    const url = `${BASE}${path}?api_key=${API_KEY}&language=en-US${extra}`;
-    const res = await fetch(url);
-    if (!res.ok) return {results:[]};
-    return await res.json();
-  } catch(e) {
-    console.warn('TMDB Error:', e);
-    return {results:[]};
-  }
-}
-
-function poster(p, size='w342') { return p ? `${IMG}${size}${p}` : null; }
-function backdrop(p, size='w1280') { return p ? `${IMG}${size}${p}` : null; }
-
-// ── PAGE ROUTER ──
-function showPage(name) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  const pg = document.getElementById(name + 'Page') || document.getElementById(name);
-  if (pg) pg.classList.add('active');
-  window.scrollTo({top:0, behavior:'smooth'});
-}
-
-// ── INIT ──
-async function init() {
-  if (localStorage.getItem('theme') === 'light') document.body.classList.add('light-theme');
-
-  // Scroll listener for navbar
-  window.addEventListener('scroll', () => {
-    document.getElementById('navbar').classList.toggle('solid', window.scrollY > 80);
-  });
-
-  // Close search on outside click
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('.nav-search-wrap')) {
-      document.getElementById('searchResults').classList.remove('show');
-    }
-  });
-
-  // Render local Sinhala movies immediately
-  renderScrollRow('row-sinhala', sinhalaMovies, true);
-
-  // Load all rows in parallel
-  const [trending, popular, action, scifi, horror, hindi] = await Promise.all([
-    tmdb('/trending/movie/week'),
-    tmdb('/movie/popular'),
-    tmdb('/discover/movie', '&with_genres=28&sort_by=popularity.desc'),
-    tmdb('/discover/movie', '&with_genres=878&sort_by=popularity.desc'),
-    tmdb('/discover/movie', '&with_genres=27&sort_by=popularity.desc'),
-    tmdb('/discover/movie', '&with_original_language=hi&sort_by=popularity.desc')
-  ]);
-
-  if (trending.results?.length) {
-    renderHero(trending.results[0]);
-    renderScrollRow('row-trending', trending.results);
-  }
-  if (popular.results?.length) renderTop10('row-top10', popular.results.slice(0,10));
-  if (action.results?.length) renderScrollRow('row-action', action.results);
-  if (scifi.results?.length) renderScrollRow('row-scifi', scifi.results);
-  if (horror.results?.length) renderScrollRow('row-horror', horror.results);
-  if (hindi.results?.length) renderScrollRow('row-hindi', hindi.results);
-
-  // Hide loading screen
-  setTimeout(() => {
-    document.getElementById('loadingScreen').classList.add('fade');
-    setTimeout(() => document.getElementById('loadingScreen').style.display='none', 500);
-  }, 1200);
-}
-
-// ── HERO ──
-function renderHero(m) {
-  if (!m) return;
-  const bg = backdrop(m.backdrop_path);
-  if (bg) document.getElementById('heroBackdrop').style.backgroundImage = `url('${bg}')`;
-  document.getElementById('heroTitle').textContent = m.title || m.name || 'Unknown';
-  document.getElementById('heroDesc').textContent = m.overview ? m.overview.slice(0,180)+'...' : '';
-  document.getElementById('heroRating').textContent = `⭐ ${m.vote_average ? m.vote_average.toFixed(1) : '?'}`;
-  document.getElementById('heroYear').textContent = m.release_date ? m.release_date.slice(0,4) : '';
-  document.getElementById('heroGenre').textContent = m.name ? 'TV Show' : 'Movie';
-  const type = m.name ? 'tv' : 'movie';
-  document.getElementById('heroPlayBtn').onclick = () => openDetail(m.id, type);
-  document.getElementById('heroInfoBtn').onclick = () => openDetail(m.id, type);
-}
-
-// ── CARD RENDERERS ──
-function cardHtml(m, isSi=false) {
-  const p = poster(m.poster_path);
-  const type = m.name ? 'tv' : 'movie';
-  const id = m.id;
-  const title = (m.title || m.name || 'Unknown').replace(/'/g, "\\'");
-  const rating = m.vote_average ? m.vote_average.toFixed(1) : '?';
-  const imgHtml = p
-    ? `<img class="movie-poster" src="${p}" alt="${title}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'movie-poster-placeholder\\'><span>${m.emoji||'🎬'}</span></div>'">`
-    : `<div class="movie-poster-placeholder"><span>${m.emoji||'🎬'}</span></div>`;
-  return `<div class="movie-card" onclick="openDetail(${id},'${type}')">
-    ${imgHtml}
-    <div class="card-rating">⭐ ${rating}</div>
-    <div class="card-sub">SUB</div>
-    <div class="card-hover-panel">
-      <div class="card-title">${m.title || m.name || 'Unknown'}</div>
-      <div class="card-actions">
-        <button class="ca-btn ca-play" onclick="event.stopPropagation();openDetail(${id},'${type}')">▶ Play</button>
-        <button class="ca-btn ca-dl" onclick="event.stopPropagation();showToast('⬇️ Opening download page...')">⬇ DL</button>
-      </div>
-    </div>
-  </div>`;
-}
-
-function renderScrollRow(rowId, list, isSi=false) {
-  const el = document.getElementById(rowId);
-  if (!el) return;
-  el.innerHTML = list.map(m => cardHtml(m, isSi)).join('');
-}
-
-function renderTop10(rowId, list) {
-  const el = document.getElementById(rowId);
-  if (!el) return;
-  el.innerHTML = list.map((m, i) => {
-    const p = poster(m.poster_path);
-    return `<div class="top10-card" onclick="openDetail(${m.id},'movie')">
-      <div class="top10-num">${i+1}</div>
-      <div class="top10-inner">
-        ${p ? `<img src="${p}" alt="${m.title||''}" style="width:100%;aspect-ratio:2/3;object-fit:cover;display:block;" loading="lazy">` : `<div style="width:100%;aspect-ratio:2/3;background:var(--surface3);display:flex;align-items:center;justify-content:center;font-size:2rem;">🎬</div>`}
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function renderGrid(containerId, list, isSi=false) {
-  const el = document.getElementById(containerId);
-  if (!el) return;
-  el.innerHTML = list.map(m => cardHtml(m, isSi)).join('');
-}
-
-// ── CATEGORY FILTER ──
-async function setCategory(cat, btn) {
-  if (btn) {
-    document.querySelectorAll('.nav-cat').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  }
-
-  if (cat === 'trending') {
-    showPage('home');
-    return;
-  }
-
-  // Rebuild mainContent for category view
-  showPage('home');
-  const main = document.getElementById('mainContent');
-
-  if (cat === 'sinhala') {
-    main.innerHTML = `
-      <section class="section">
-        <div class="section-head"><div class="section-title"><div class="section-title-bar"></div>🇱🇰 සිංහල Films</div></div>
-        <div class="grid-layout" id="catGrid"></div>
-      </section>`;
-    renderGrid('catGrid', sinhalaMovies, true);
-    return;
-  }
-
-  main.innerHTML = `
-    <section class="section">
-      <div class="section-head"><div class="section-title"><div class="section-title-bar"></div>🎬 Browsing Catalog</div></div>
-      <div class="grid-layout" id="catGrid"><div style="color:var(--muted);padding:40px;text-align:center;">Loading...</div></div>
-    </section>`;
-
-  showToast('⏳ Loading catalog...');
-
-  let data;
-  if (cat === 'tv') {
-    data = await tmdb('/trending/tv/week');
-  } else if (cat === 'hindi') {
-    data = await tmdb('/discover/movie', '&with_original_language=hi&sort_by=popularity.desc');
-  } else {
-    data = await tmdb('/discover/movie', `&with_genres=${cat}&sort_by=popularity.desc`);
-  }
-
-  const grid = document.getElementById('catGrid');
-  if (!grid) return;
-  if (data.results?.length) {
-    renderGrid('catGrid', data.results);
-  } else {
-    grid.innerHTML = '<div style="color:var(--muted);padding:40px;text-align:center;">No results found.</div>';
-  }
-}
-
-// ── DETAIL PAGE ──
-async function openDetail(id, type='movie') {
-  previousPage = document.querySelector('.page.active')?.id || 'homePage';
-
-  // Set up back button
-  document.getElementById('backBtn').onclick = () => {
-    // Stop player
-    document.getElementById('actualPlayerWrap').innerHTML = '';
-    document.getElementById('actualPlayerWrap').style.display = 'none';
-    document.getElementById('playerPreScreen').style.display = 'flex';
-    currentMovieId = null;
-    showPage('home');
-  };
-
-  showPage('detail');
-  showToast('⏳ Loading movie details...');
-
-  currentMovieId = id;
-  currentImdbId = null;  // will be fetched for AnyEmbed
-  currentMovieType = type;
-  currentTrailerKey = null;
-  currentSeason = 1;
-  currentEpisode = 1;
-
-  // Reset player
-  document.getElementById('actualPlayerWrap').innerHTML = '';
-  document.getElementById('actualPlayerWrap').style.display = 'none';
-  document.getElementById('playerPreScreen').style.display = 'flex';
-
-  // Hide/show TV controls
-  document.getElementById('epControls').style.display = type === 'tv' ? 'flex' : 'none';
-
-  // Local Sinhala movie
-  const local = sinhalaMovies.find(x => x.id === id);
-  if (local) {
-    renderDetail(local, null, null, type);
-    return;
-  }
-
-  // Fetch from TMDB
-  const [details, credits, videos, extIds] = await Promise.all([
-    tmdb(`/${type}/${id}`),
-    tmdb(`/${type}/${id}/credits`),
-    tmdb(`/${type}/${id}/videos`),
-    tmdb(`/${type}/${id}/external_ids`)
-  ]);
-  // Store IMDB ID for AnyEmbed (requires imdb id)
-  if (extIds?.imdb_id) currentImdbId = extIds.imdb_id;
-
-  // Get trailer key
-  if (videos.results?.length) {
-    const t = videos.results.find(v => v.type==='Trailer' && v.site==='YouTube')
-           || videos.results.find(v => v.site==='YouTube');
-    if (t) currentTrailerKey = t.key;
-  }
-
-  // TV seasons
-  if (type === 'tv' && details.number_of_seasons) {
-    totalSeasons = details.number_of_seasons;
-    buildSeasonSelect(totalSeasons);
-  }
-
-  renderDetail(details, credits, videos, type);
-
-  // Load similar
-  const similar = await tmdb(`/${type}/${id}/similar`);
-  if (similar.results?.length) {
-    document.getElementById('similarLabel').style.display = 'block';
-    renderGrid('similarGrid', similar.results.slice(0,12));
-  }
-}
-
-function renderDetail(m, credits, videos, type) {
-  document.getElementById('detailTitle').textContent = m.title || m.name || 'Unknown';
-  document.getElementById('detailDesc').textContent = m.overview || 'No description available.';
-
-  const bg = backdrop(m.backdrop_path);
-  document.getElementById('detailBackdrop').style.backgroundImage = bg ? `url('${bg}')` : 'none';
-
-  const p = poster(m.poster_path, 'w500');
-  const posterEl = document.getElementById('detailPoster');
-  const posterNA = document.getElementById('detailPosterNA');
-  if (p) {
-    posterEl.src = p;
-    posterEl.style.display = 'block';
-    posterNA.style.display = 'none';
-  } else {
-    posterEl.style.display = 'none';
-    posterNA.style.display = 'flex';
-    posterNA.textContent = m.emoji || '🎬';
-  }
-
-  // Meta row
-  const year = (m.release_date || m.first_air_date || '').slice(0,4);
-  const runtime = m.runtime ? `${m.runtime} min` : (m.episode_run_time?.[0] ? `${m.episode_run_time[0]} min/ep` : '');
-  const langs = m.spoken_languages?.map(l=>l.english_name).slice(0,2).join(', ') || '';
-  document.getElementById('detailMetaRow').innerHTML = `
-    ${m.vote_average ? `<span class="meta-pill gold">⭐ ${m.vote_average.toFixed(1)}</span>` : ''}
-    ${year ? `<span class="meta-pill">📅 ${year}</span>` : ''}
-    ${runtime ? `<span class="meta-pill">⏱ ${runtime}</span>` : ''}
-    ${langs ? `<span class="meta-pill">🌐 ${langs}</span>` : ''}
-    <span class="meta-pill green">සිංහල SUB</span>
-  `;
-
-  // Genres
-  const genres = m.genres?.length ? m.genres : (m.genres?.map ? m.genres : []);
-  document.getElementById('detailGenres').innerHTML = (genres || []).map(g=>`<span class="genre-tag">${g.name}</span>`).join('');
-
-  // Cast
-  const castEl = document.getElementById('detailCastScroll');
-  if (credits?.cast?.length) {
-    castEl.innerHTML = credits.cast.slice(0,10).map(c => {
-      const cp = c.profile_path ? `<img class="cast-avatar" src="${IMG}w92${c.profile_path}" alt="${c.name}" loading="lazy">` : `<div class="cast-no-avatar">👤</div>`;
-      return `<div class="cast-card">${cp}<div class="cast-name">${c.name}</div><div class="cast-char">${c.character||''}</div></div>`;
-    }).join('');
-  } else {
-    castEl.innerHTML = '<div style="color:var(--muted);font-size:0.85rem;padding:10px 0;">Cast data unavailable.</div>';
-  }
-}
-
-// ── TV SEASON/EPISODE ──
-function buildSeasonSelect(total) {
-  const sel = document.getElementById('seasonSelect');
-  sel.innerHTML = '';
-  for (let i=1; i<=total; i++) {
-    sel.innerHTML += `<option value="${i}">Season ${i}</option>`;
-  }
-  updateEpisodeSelect();
-}
-
-async function updateEpisodeSelect() {
-  const season = parseInt(document.getElementById('seasonSelect').value) || 1;
-  currentSeason = season;
-  const data = await tmdb(`/tv/${currentMovieId}/season/${season}`);
-  const epSel = document.getElementById('episodeSelect');
-  epSel.innerHTML = '';
-  const count = data.episodes?.length || 20;
-  for (let i=1; i<=count; i++) {
-    epSel.innerHTML += `<option value="${i}">Episode ${i}</option>`;
-  }
-  currentEpisode = 1;
-}
-
-// ── PLAYER ──
-const SERVERS = {
-  vidsrc:      (id, type, s, e) => type==='tv' ? `https://vidsrc.to/embed/tv/${id}/${s}/${e}` : `https://vidsrc.to/embed/movie/${id}`,
-  anyembed:    (id, type, s, e) => { const aid = currentImdbId || id; return type==='tv' ? `https://anyembed.xyz/tv/${aid}/${s}/${e}` : `https://anyembed.xyz/movie/${aid}`; },
-  embed:       (id, type, s, e) => type==='tv' ? `https://www.2embed.cc/embedtv/${id}&s=${s}&e=${e}` : `https://www.2embed.cc/embed/${id}`,
-  superembed:  (id, type, s, e) => type==='tv' ? `https://multiembed.mov/?video_id=${id}&tmdb=1&s=${s}&e=${e}` : `https://multiembed.mov/?video_id=${id}&tmdb=1`,
-  moviesapi:   (id, type, s, e) => type==='tv' ? `https://moviesapi.club/tv/${id}-${s}-${e}` : `https://moviesapi.club/movie/${id}`,
-  smashystream:(id, type, s, e) => type==='tv' ? `https://player.smashystream.com/tvPlayer.php?id=${id}&s=${s}&e=${e}` : `https://player.smashystream.com/playit.php?id=${id}`
-};
-
-function switchServer(name, btn) {
-  currentServer = name;
-  document.querySelectorAll('.srv-tab').forEach(b => b.classList.remove('active'));
-  if (btn) btn.classList.add('active');
-  // If player was active, reload with new server
-  if (document.getElementById('actualPlayerWrap').style.display !== 'none') {
-    loadPlayer();
-  }
-}
-
-function scrollToPlayer() {
-  document.getElementById('playerTitleSection').scrollIntoView({behavior:'smooth'});
-  setTimeout(loadPlayer, 400);
-}
-
-function loadPlayer() {
-  if (!currentMovieId) {
-    showToast('❌ No movie selected.');
-    return;
-  }
-  if (currentMovieId > 99990000) {
-    showToast('❌ Local Sinhala films cannot be streamed — download subtitles instead.');
-    return;
-  }
-
-  const s = currentSeason || 1;
-  const e = parseInt(document.getElementById('episodeSelect')?.value) || 1;
-  currentEpisode = e;
-
-  const fn = SERVERS[currentServer] || SERVERS.vidsrc;
-  const url = fn(currentMovieId, currentMovieType, s, e);
-
-  document.getElementById('playerPreScreen').style.display = 'none';
-  const wrap = document.getElementById('actualPlayerWrap');
-  wrap.style.display = 'block';
-  wrap.innerHTML = `<iframe src="${url}" allowfullscreen allow="autoplay; encrypted-media; fullscreen" referrerpolicy="no-referrer" style="width:100%;height:100%;border:none;display:block;"></iframe>`;
-
-  showToast(`⚡ ${currentServer.toUpperCase()} server connected`);
-}
-
-// ── TRAILER ──
-function playTrailer() {
-  if (!currentTrailerKey) {
-    showToast('❌ Trailer not available for this title.');
-    return;
-  }
-  document.getElementById('trailerFrame').innerHTML = `<iframe src="https://www.youtube.com/embed/${currentTrailerKey}?autoplay=1" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
-  document.getElementById('trailerModal').classList.add('open');
-}
-
-function closeTrailer() {
-  document.getElementById('trailerModal').classList.remove('open');
-  document.getElementById('trailerFrame').innerHTML = '';
-}
-
-// ── SEARCH ──
-function handleSearch(q) {
-  clearTimeout(searchTimeout);
-  const box = document.getElementById('searchResults');
-  if (!q.trim()) { box.classList.remove('show'); return; }
-
-  searchTimeout = setTimeout(async () => {
-    const d = await tmdb('/search/multi', `&query=${encodeURIComponent(q)}`);
-    if (!d.results?.length) {
-      box.innerHTML = '<div style="padding:12px 14px;color:var(--muted);font-size:0.85rem;">No results found</div>';
-      box.classList.add('show');
-      return;
-    }
-    box.innerHTML = d.results.slice(0,6).map(m => {
-      const p = poster(m.poster_path, 'w92');
-      const type = m.media_type || 'movie';
-      const title = m.title || m.name || 'Unknown';
-      const year = (m.release_date || m.first_air_date || '').slice(0,4);
-      return `<div class="sr-item" onclick="openDetail(${m.id},'${type}');document.getElementById('searchResults').classList.remove('show');document.getElementById('searchInput').value=''">
-        ${p ? `<img class="sr-poster" src="${p}" alt="${title}">` : `<div class="sr-poster" style="background:var(--surface3);display:flex;align-items:center;justify-content:center;">🎬</div>`}
-        <div class="sr-info">
-          <div class="sr-title">${title}</div>
-          <div class="sr-year">${year} · ${type==='tv'?'TV Show':'Movie'} ${m.vote_average?'· ⭐'+m.vote_average.toFixed(1):''}</div>
-        </div>
-      </div>`;
-    }).join('');
-    box.classList.add('show');
-  }, 280);
-}
-
-async function doFullSearch(q) {
-  if (!q.trim()) return;
-  document.getElementById('searchResults').classList.remove('show');
-  showPage('search');
-  document.getElementById('searchPageTitle').textContent = `Results for "${q}"`;
-  document.getElementById('searchPageSub').textContent = 'Searching...';
-  document.getElementById('searchPageGrid').innerHTML = '<div style="color:var(--muted);padding:40px;text-align:center;">🔍 Searching...</div>';
-
-  const d = await tmdb('/search/multi', `&query=${encodeURIComponent(q)}`);
-  document.getElementById('searchPageSub').textContent = `${d.results?.length || 0} results found`;
-
-  if (!d.results?.length) {
-    document.getElementById('searchPageGrid').innerHTML = `
-      <div class="search-empty">
-        <div class="empty-icon">🔍</div>
-        <p>No results found for "${q}"</p>
-      </div>`;
-    return;
-  }
-  renderGrid('searchPageGrid', d.results.filter(m => m.media_type !== 'person'));
-}
-
-// ── THEME ──
-function toggleTheme() {
-  document.body.classList.toggle('light-theme');
-  localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
-  showToast(document.body.classList.contains('light-theme') ? '☀️ Light mode' : '🌙 Dark mode');
-}
-
-// ── TOAST ──
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  if (!t) return;
-  t.textContent = msg;
-  t.classList.add('show');
-  clearTimeout(t._timer);
-  t._timer = setTimeout(() => t.classList.remove('show'), 2500);
-}
-
-// ── START ──
-window.addEventListener('DOMContentLoaded', init);
-</script>
-</body>
-</html>
+.s

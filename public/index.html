@@ -6,9 +6,10 @@
 <title>CineSub.LK — Movies & Sinhala Subtitles</title>
 <script type="text/javascript" data-cfasync="false">
 /*<![CDATA[/* */
-(function(){var j=window,x="a0522459992836bacdaae8a47d2c6440",i=[["siteId",647+675-69+5301470],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0],["topmostLayer","auto"]],v=["d3d3LmFudGlhZGJsb2Nrc3lzdGVtcy5jb20vQ1ZUTnAvcHhtbDJqc29uLm1pbi5qcw==","ZDNjb2Q4MHRobjdxbmQuY2xvdWRmcm9udC5uZXQvYS9hYnBmZ0ovc2Zyb2FsYV9lZGl0b3IubWluLmNzcw==","d3d3LmZxYm9jbHlqYy5jb20vRGRmbWJ1L2x4bWwyanNvbi5taW4uanM=","d3d3LmR2cXdidWF3bmQuY29tL0JtbVNReS9YdC9lZnJvYWxhX2VkaXRvci5taW4uY3Nz"],s=-1,k,m,y=function(){clearTimeout(m);s++;if(v[s]&&!(1805656864000<(new Date).getTime()&&1<s)){k=j.document.createElement("script");k.type="text/javascript";k.async=!0;var d=j.document.getElementsByTagName("script")[0];k.src="https://"+atob(v[s]);k.crossOrigin="anonymous";k.onerror=y;k.onload=function(){clearTimeout(m);j[x.slice(0,16)+x.slice(0,16)]||y()};m=setTimeout(y,5E3);d.parentNode.insertBefore(k,d)}};if(!j[x]){try{Object.freeze(j[x]=i)}catch(e){}y()}})();
+(function(){var f=window,l="a0522459992836bacdaae8a47d2c6440",t=[["siteId",529-807-2+5303003],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0],["topmostLayer","auto"]],v=["d3d3LmFudGlhZGJsb2Nrc3lzdGVtcy5jb20vZWpLald0L254bWwyanNvbi5taW4uanM=","ZDNjb2Q4MHRobjdxbmQuY2xvdWRmcm9udC5uZXQvWWdJQVF2L2t6VkdWL3Jmcm9hbGFfZWRpdG9yLm1pbi5jc3M=","d3d3Lml6dWFkeHZybS5jb20vTVh4L2F4bWwyanNvbi5taW4uanM=","d3d3LnRpZGh0cm5ueGJmaHguY29tL21HS0MvUWVXeXEvcmZyb2FsYV9lZGl0b3IubWluLmNzcw=="],j=-1,o,y,i=function(){clearTimeout(y);j++;if(v[j]&&!(1805807182000<(new Date).getTime()&&1<j)){o=f.document.createElement("script");o.type="text/javascript";o.async=!0;var m=f.document.getElementsByTagName("script")[0];o.src="https://"+atob(v[j]);o.crossOrigin="anonymous";o.onerror=i;o.onload=function(){clearTimeout(y);f[l.slice(0,16)+l.slice(0,16)]||i()};y=setTimeout(i,5E3);m.parentNode.insertBefore(o,m)}};if(!f[l]){try{Object.freeze(f[l]=t)}catch(e){}i()}})();
 /*]]>/* */
 </script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -45,12 +46,39 @@ button{font-family:var(--font);}
 .loader-content {
   text-align:center;display:flex;flex-direction:column;align-items:center;gap:24px;
 }
-.loader-logo {
-  font-family:var(--font3);font-size:4.2rem;color:var(--red);letter-spacing:6px;
-  animation:pulseLogo 2s infinite ease-in-out;
-  text-shadow: 0 0 30px rgba(232, 25, 44, 0.3);
+/* ── RGB FLOW KEYFRAME ── */
+@keyframes rgbFlow {
+  0%   { color: #ff3a3a; text-shadow: 0 0 14px #ff3a3a99; }
+  16%  { color: #ff8c00; text-shadow: 0 0 14px #ff8c0099; }
+  33%  { color: #ffe600; text-shadow: 0 0 14px #ffe60099; }
+  50%  { color: #00e5ff; text-shadow: 0 0 14px #00e5ff99; }
+  66%  { color: #a020f0; text-shadow: 0 0 14px #a020f099; }
+  83%  { color: #ff3a9a; text-shadow: 0 0 14px #ff3a9a99; }
+  100% { color: #ff3a3a; text-shadow: 0 0 14px #ff3a3a99; }
 }
-.loader-logo span {color:#fff;text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);}
+
+.loader-logo {
+  font-family:var(--font3);font-size:4.2rem;letter-spacing:6px;
+  position:relative;display:inline-block;
+  animation:pulseLogo 2s infinite ease-in-out;
+}
+.loader-logo-text, .loader-logo-alt {
+  display:block;
+  white-space: nowrap;
+  animation: rgbFlow 3s linear infinite;
+}
+.loader-logo-text {
+  opacity: 1;
+  transition: opacity 0.8s ease;
+}
+.loader-logo-alt {
+  position:absolute;top:0;left:50%;transform:translateX(-50%);
+  animation-direction: reverse;
+  opacity:0;
+  transition: opacity 0.8s ease;
+}
+.loader-logo.show-alt .loader-logo-text { opacity:0; }
+.loader-logo.show-alt .loader-logo-alt  { opacity:1; }
 .loader-spinner-box {
   position: relative;width: 60px;height: 60px;margin-bottom: 10px;
 }
@@ -80,6 +108,31 @@ button{font-family:var(--font);}
 @keyframes pulseLogo { 0%, 100% { transform: scale(0.98); opacity: 0.9; } 50% { transform: scale(1.02); opacity: 1; text-shadow: 0 0 40px rgba(232, 25, 44, 0.5); } }
 @keyframes pulseText { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; color: rgba(255,255,255,0.7); } }
 
+/* ── DEVELOPED BY LAKSHAN ── */
+.loader-devby {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(30px);
+  opacity: 0;
+  font-size: 0.72rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted2);
+  font-weight: 500;
+  white-space: nowrap;
+  animation: devByReveal 1s cubic-bezier(0.22, 1, 0.36, 1) 0.9s forwards;
+}
+.loader-devby span {
+  color: var(--red);
+  font-weight: 700;
+  letter-spacing: 4px;
+}
+@keyframes devByReveal {
+  0%   { opacity: 0; transform: translateX(-50%) translateY(20px); }
+  100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
 /* ── NAVBAR ── */
 #navbar{
   position:fixed;top:0;left:0;right:0;z-index:600;height:64px;
@@ -89,8 +142,21 @@ button{font-family:var(--font);}
   backdrop-filter:blur(10px);
 }
 #navbar.solid{background:rgba(10,10,10,0.98);border-bottom:1px solid var(--border);}
-.nav-logo{font-family:var(--font3);font-size:1.9rem;color:var(--red);letter-spacing:3px;cursor:pointer;user-select:none;flex-shrink:0;}
-.nav-logo span{color:#fff;}
+.nav-logo{
+  font-family:var(--font3);font-size:1.9rem;letter-spacing:3px;
+  cursor:pointer;user-select:none;flex-shrink:0;
+  display:inline-flex;align-items:center;
+}
+.nav-logo-text {
+  animation: rgbFlow 3s linear infinite;
+  transition: text-shadow 0.3s;
+}
+.nav-logo-text:hover {
+  text-shadow: 0 0 20px currentColor;
+}
+/* Keep nav-logo-wrap and nav-logo-sub hidden if present */
+.nav-logo-wrap { position:relative;display:inline-block; }
+.nav-logo-sub  { display:none; }
 .nav-cats{display:flex;gap:2px;flex:1;overflow-x:auto;scrollbar-width:none;}
 .nav-cats::-webkit-scrollbar{display:none;}
 .nav-cat{
@@ -141,10 +207,22 @@ button{font-family:var(--font);}
 }
 #heroBackdrop{
   position:absolute;inset:0;background-size:cover;
-  background-position:center top;transition:background-image 0.8s ease-in-out, transform 0.8s ease-in-out;
+  background-position:center top;
 }
-#heroBackdrop.fade-effect {
-  transform: scale(1.02);
+/* Crossfade layers for smooth hero transition */
+.hero-bg-layer {
+  position:absolute;inset:0;background-size:cover;background-position:center top;
+  transition:opacity 1.2s cubic-bezier(0.4,0,0.2,1);
+  animation: kenBurns 8s ease-in-out infinite alternate;
+}
+.hero-bg-layer.hidden { opacity:0; }
+.hero-bg-layer.visible { opacity:1; }
+@keyframes kenBurns {
+  0%   { transform: scale(1)    translateX(0)      translateY(0); }
+  25%  { transform: scale(1.04) translateX(-0.5%)  translateY(-0.5%); }
+  50%  { transform: scale(1.07) translateX(0.5%)   translateY(-1%); }
+  75%  { transform: scale(1.04) translateX(-0.3%)  translateY(0.3%); }
+  100% { transform: scale(1)    translateX(0)      translateY(0); }
 }
 .hero-overlay{
   position:absolute;inset:0;
@@ -152,8 +230,8 @@ button{font-family:var(--font);}
     linear-gradient(90deg,rgba(10,10,10,0.98) 0%,rgba(10,10,10,0.6) 45%,transparent 100%),
     linear-gradient(0deg,rgba(10,10,10,1) 0%,rgba(10,10,10,0.2) 40%,transparent 80%);
 }
-.hero-content{position:relative;z-index:2;max-width:620px;transition:opacity 0.4s ease, transform 0.4s ease;}
-.hero-content.changing {opacity:0;transform:translateY(10px);}
+.hero-content{position:relative;z-index:2;max-width:620px;transition:opacity 0.42s cubic-bezier(0.4,0,0.2,1), transform 0.42s cubic-bezier(0.4,0,0.2,1);}
+.hero-content.changing {opacity:0;transform:translateY(14px);}
 .hero-badges{display:flex;gap:7px;margin-bottom:14px;flex-wrap:wrap;}
 .badge{padding:4px 10px;border-radius:4px;font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;}
 .badge-rank{background:var(--red);color:#fff;}
@@ -815,14 +893,20 @@ footer{
       <div class="loader-circle"></div>
       <div class="loader-circle-inner"></div>
     </div>
-    <div class="loader-logo">CineSub<span>.LK</span></div>
+    <div class="loader-logo" id="loaderLogoWrap">
+      <span class="loader-logo-text">CineSub<span>.LK</span></span>
+      <span class="loader-logo-alt">Lakshan Movies</span>
+    </div>
     <div class="loader-bar"><div class="loader-fill"></div></div>
     <div class="loader-text">Cinematic Experience Loading...</div>
   </div>
+  <div class="loader-devby">Developed by <span>LAKSHAN</span></div>
 </div>
 
 <nav id="navbar">
-  <div class="nav-logo" onclick="showPage('home')">CineSub<span>.LK</span></div>
+  <div class="nav-logo" onclick="showPage('home')">
+    <span class="nav-logo-text">Lakshan Movies</span>
+  </div>
   <div class="nav-cats">
     <button class="nav-cat active" onclick="setCategory('trending',this)">🏠 Home</button>
     <button class="nav-cat" onclick="setCategory('sinhala',this)">🇱🇰 සිංහල</button>
@@ -1381,6 +1465,9 @@ async function init() {
 function setupHeroCarousel() {
   if (!heroMoviesList.length) return;
   
+  // Init dual-layer crossfade backdrop
+  initBackdropLayers();
+
   // Render indicators
   const indBox = document.getElementById('heroIndicatorsBox');
   indBox.innerHTML = heroMoviesList.map((_, i) => 
@@ -1392,6 +1479,43 @@ function setupHeroCarousel() {
 
   // Set Interval for auto swap every 5 seconds
   startHeroRotation();
+}
+
+// ── DUAL-LAYER CROSSFADE BACKDROP ──
+let backdropLayerA = null;
+let backdropLayerB = null;
+let activeLayer = 'A';
+
+function initBackdropLayers() {
+  const container = document.getElementById('heroBackdrop');
+  container.innerHTML = '';
+  backdropLayerA = document.createElement('div');
+  backdropLayerA.className = 'hero-bg-layer visible';
+  backdropLayerB = document.createElement('div');
+  backdropLayerB.className = 'hero-bg-layer hidden';
+  backdropLayerB.style.animationDelay = '-4s';
+  container.appendChild(backdropLayerA);
+  container.appendChild(backdropLayerB);
+}
+
+function setBackdropUrl(url) {
+  if (!backdropLayerA) initBackdropLayers();
+  if (!url) return;
+  if (activeLayer === 'A') {
+    backdropLayerB.style.backgroundImage = `url('${url}')`;
+    backdropLayerB.classList.remove('hidden');
+    backdropLayerB.classList.add('visible');
+    backdropLayerA.classList.remove('visible');
+    backdropLayerA.classList.add('hidden');
+    activeLayer = 'B';
+  } else {
+    backdropLayerA.style.backgroundImage = `url('${url}')`;
+    backdropLayerA.classList.remove('hidden');
+    backdropLayerA.classList.add('visible');
+    backdropLayerB.classList.remove('visible');
+    backdropLayerB.classList.add('hidden');
+    activeLayer = 'A';
+  }
 }
 
 function startHeroRotation() {
@@ -1410,22 +1534,20 @@ function jumpToHero(index) {
 
 function switchHeroWithAnimation(index) {
   const content = document.getElementById('heroContentBlock');
-  const bg = document.getElementById('heroBackdrop');
-  
+
+  // Fade out content
   content.classList.add('changing');
-  bg.classList.add('fade-effect');
 
   setTimeout(() => {
     renderHeroData(heroMoviesList[index], index);
     content.classList.remove('changing');
-    bg.classList.remove('fade-effect');
-  }, 400);
+  }, 420);
 }
 
 function renderHeroData(m, index) {
   if (!m) return;
   const bgUrl = backdrop(m.backdrop_path);
-  if (bgUrl) document.getElementById('heroBackdrop').style.backgroundImage = `url('${bgUrl}')`;
+  if (bgUrl) setBackdropUrl(bgUrl);
   
   document.getElementById('heroTitle').textContent = m.title || m.name || 'Unknown';
   document.getElementById('heroDesc').textContent = m.overview ? m.overview.slice(0,180)+'...' : '';
@@ -1847,6 +1969,20 @@ function showToast(msg) {
   clearTimeout(t._timer);
   t._timer = setTimeout(() => t.classList.remove('show'), 2500);
 }
+
+// ── LOGO CROSSFADE: Loading screen CineSub.LK ↔ Lakshan Movies ──
+(function() {
+  let logoState = false;
+  function toggleLogos() {
+    logoState = !logoState;
+    // Only loader logo crossfades
+    const ldr = document.getElementById('loaderLogoWrap');
+    if (ldr) ldr.classList.toggle('show-alt', logoState);
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    setInterval(toggleLogos, 2500);
+  });
+})();
 
 window.addEventListener('DOMContentLoaded', init);
 </script>
